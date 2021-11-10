@@ -1,25 +1,81 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
-function App() {
+// ダミーデータ
+const dummyTodoData = [
+  {
+    id: 1,
+    title: "sample1",
+    status: "Pending",
+    limit: "2021-11-30",
+  },
+  { id: 2, title: "sample2", status: "Done", limit: "2021-11-20" },
+  {
+    id: 3,
+    title: "sample3",
+    status: "Working",
+    limit: "2021-11-15",
+  },
+  {
+    id: 4,
+    title: "sample4",
+    status: "Working",
+    limit: "2021-11-11",
+  },
+  {
+    id: 5,
+    title: "sample5",
+    status: "Working",
+    limit: "2021-11-06",
+  },
+];
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          ListView <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+      <header>
+        <h1>Todo</h1>
       </header>
-    </div>
+      <main>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Status</th>
+              <th>Limit</th>
+              <th>Title</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* ダミーデータを表示 */}
+            {dummyTodoData.map((todo, index) => {
+              return (
+                <tr key={index}>
+                  <td>{todo.id}</td>
+                  <td>{todo.status}</td>
+                  <td>{todo.limit}</td>
+                  <td>{todo.title}</td>
+                  <td>
+                    <ul>
+                      <li>
+                        <button className="btn">Detail</button>
+                      </li>
+                      <li>
+                        <button className="btn">Edit</button>
+                      </li>
+                      <li>
+                        <button className="btn">Delete</button>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </main>
+    </>
   );
-}
+};
 
 export default App;
