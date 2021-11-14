@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
 import { Create } from "./routes/Create";
 import { Edit } from "./routes/Edit";
@@ -7,7 +7,7 @@ import { ListView } from "./routes/ListView";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <>
       <nav>
         <ul>
           <li>
@@ -34,7 +34,7 @@ const App = () => {
         <Route path="edit" element={<Edit />} />
         <Route path="detail" element={<Detail />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 };
 
