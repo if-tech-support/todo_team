@@ -15,15 +15,15 @@
   opacity: 0.7;
 }
 
-.detail-btn {
+.btn-detail {
   background-color: #ff8c00;
 }
 
-.edit-btn {
+.btn-edit {
   background-color: #228b22;
 }
 
-.delete-btn {
+.btn-delete {
   background-color: #dc143c;
 }
 

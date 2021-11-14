@@ -36,13 +36,13 @@ const App = () => {
                   <td>
                     <ul>
                       <li>
-                        <button className="btn detail-btn">Detail</button>
+                        <button className="btn btn-detail">Detail</button>
                       </li>
                       <li>
-                        <button className="btn edit-btn">Edit</button>
+                        <button className="btn btn-edit">Edit</button>
                       </li>
                       <li>
-                        <button className="btn delete-btn">Delete</button>
+                        <button className="btn btn-delete">Delete</button>
                       </li>
                     </ul>
                   </td>
