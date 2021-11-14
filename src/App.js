@@ -30,9 +30,9 @@ const App = () => {
       </nav>
       <Routes>
         <Route exact path="/" element={<ListView />} />
-        <Route exact path="create" element={<Create />} />
-        <Route exact path="edit" element={<Edit />} />
-        <Route exact path="detail" element={<Detail />} />
+        <Route path="create" element={<Create />} />
+        <Route path="edit" element={<Edit />} />
+        <Route path="detail" element={<Detail />} />
       </Routes>
     </BrowserRouter>
   );
