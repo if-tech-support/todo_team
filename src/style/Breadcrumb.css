@@ -14,12 +14,12 @@
   list-style: none;
 }
 
-.breadcrumb-elements li {
+.breadcrumb-element {
   color: #fff;
   font-size: 24px;
 }
 
-.breadcrumb-elements li:nth-of-type(n + 2)::before {
+.breadcrumb-element:nth-of-type(n + 2)::before {
   content: ">";
   color: #fff;
   margin: 0 10px;

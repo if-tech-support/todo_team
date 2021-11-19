@@ -32,7 +32,6 @@ const dummyTodoData = [
 // ぱんくずデータ 画面ごとに変更する
 const breadcrumbElements = [{ id: 1, title: "ホーム" }];
 
-// ダミーコンポーネント
 export const ListView = () => {
   return (
     <>
@@ -40,25 +39,53 @@ export const ListView = () => {
       <main>
         <div className="task-info-area">
           <p className="task-info">
-            進行中のタスクは<span>3個のタスク</span>
-            <br />
-            があります
+            進行中のタスクは<span>3個</span>あります
           </p>
           <button className="btn-add">
             <span>+</span>タスクを追加
           </button>
         </div>
         <div className="search-area">
-          <input
-            className="search-task-box"
-            type="text"
-            placeholder="🔍検索したいタスクを入力"
-          />
+          <div className="search-keyword-area">
+            <label className="label-search-area" htmlFor="search-keyword-box">
+              キーワード
+            </label>
+            <input
+              id="search-keyword-box"
+              className="search-box"
+              type="text"
+              placeholder="キーワードを入力"
+            />
+          </div>
+          <div className="search-priority-area">
+            <label className="label-search-area">ステータス</label>
+            <select className="search-box">
+              <option value="all" selected>
+                すべて
+              </option>
+              <option value="complete">完了</option>
+              <option value="working">作業中</option>
+              <option value="pending">未着手</option>
+            </select>
+          </div>
+          <div className="search-status-area">
+            <label className="label-search-area">優先度</label>
+            <select className="search-box">
+              <option value="all" selected>
+                すべて
+              </option>
+              <option value="high">高</option>
+              <option value="normal">中</option>
+              <option value="low">低</option>
+            </select>
+          </div>
         </div>
         <div className="bulk-exection-area">
-          <label className="bulk-exection-label">まとめて操作：</label>
+          <label className="label-bulk-exection">まとめて操作：</label>
           <select className="bulk-exection-selection">
-            <option value="">------------</option>
+            <option value="" selected>
+              ------------
+            </option>
             <option value="complete">完了</option>
             <option value="delete">削除</option>
           </select>
@@ -83,30 +110,42 @@ export const ListView = () => {
                   <td>
                     <input type="checkbox" />
                   </td>
-                  <td>
+                  <td className="table-content-title">
                     {todo.title}
                     <button className="btn-edit">✎</button>
                   </td>
                   <td>
                     {todo.status === "未着手" && (
-                      <p className="status status-pending">{todo.status}</p>
+                      <p className="table-content-status table-content-status-pending">
+                        {todo.status}
+                      </p>
                     )}
                     {todo.status === "作業中" && (
-                      <p className="status status-working">{todo.status}</p>
+                      <p className="table-content-status table-content-status-working">
+                        {todo.status}
+                      </p>
                     )}
                     {todo.status === "完了" && (
-                      <p className="status status-done">{todo.status}</p>
+                      <p className="table-content-status table-content-status-done">
+                        {todo.status}
+                      </p>
                     )}
                   </td>
                   <td>
                     {todo.priority === "高" && (
-                      <p className="priority-high">{todo.priority}</p>
+                      <p className="table-content-priority-high">
+                        {todo.priority}
+                      </p>
                     )}
                     {todo.priority === "中" && (
-                      <p className="priority-normal">{todo.priority}</p>
+                      <p className="table-content-priority-normal">
+                        {todo.priority}
+                      </p>
                     )}
                     {todo.priority === "低" && (
-                      <p className="priority-low">{todo.priority}</p>
+                      <p className="table-content-priority-low">
+                        {todo.priority}
+                      </p>
                     )}
                   </td>
                   <td>{todo.createAt}</td>
