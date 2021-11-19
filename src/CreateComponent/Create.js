@@ -22,8 +22,8 @@ function Create() {
 
         <div className="todo-create">
 
-          <div className="task-container">
-            <label className="task-label">タスク名 :</label>
+          <div className="task-container input-container">
+            <label className="task-label input-area-label">タスク名 :</label>
             <input
                 className="title-input input"
                 type="text"
@@ -33,8 +33,8 @@ function Create() {
             />
           </div>
 
-          <div className="text-container">
-            <label className="text-label">内容 :</label>
+          <div className="text-container input-container">
+            <label className="text-label input-area-label">内容 :</label>
             <textarea
                 className="text-input input"
                 type="text"
@@ -44,31 +44,20 @@ function Create() {
             ></textarea>
           </div>
 
-          <div className="status-container">
-            <label className="status-label">ステータス :</label>
-            <select className="select-status">
-              <option className="default">--------------------</option>
-              <option className="not-started">未着手</option>
-              <option className="in-progress">進行中</option>
-            </select>
-          </div>
-
-          <div className="priority-container">
-            <label className="priority-label">優先度 :</label>
-            <select className="select-priority">
-              <option className="default">--------------------</option>
+          <div className="priority-container select-container input-container">
+            <label className="priority-label input-area-label">優先度 :</label>
+            <select className="select-priority select-box">
+              <option className="select-default">--------------------</option>
               <option className="high">高</option>
               <option className="middle">中</option>
               <option className="low">低</option>
             </select>
           </div>
 
-          <div className="add-container">
+          <div className="btn-container">
+            <button className="back-button button" onClick={"入力値取得関数：backFunc"}>戻る</button>
             {/* テスト用テキスト 追加/保存(編集)ボタンを動的に切り替える */}
             <button className="add-button button" onClick={"入力値取得関数：addTodo"}>追加</button>
-          </div>
-          <div>
-            <input type="text" />
           </div>
          </div>
       </div>

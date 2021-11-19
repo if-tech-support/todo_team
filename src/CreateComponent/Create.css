@@ -1,53 +1,12 @@
 .create-container {
-  width:100%;
-}
-
-.create-container {
-  /* width: 1920px; */
-}
-
-.header {
-  font-family: Roboto;
-  font-style: normal;
-  background-color: #4E758D;
-  position: relative;
-}
-
-/* タイトル */
-.title {
-  height: 100px;
-  line-height: 100px;
-  margin: auto auto auto 56px;
-  background-color: #4E758D; 
-  color: #ffffff; 
-  font-size: 48px;
-  font-weight: normal;
-  box-sizing:  border-box;
-}
-
-/* ぱんくず */
-.bread-crumb-container {
-  background-color: #84ADC5;
-}
-
-.bread-crumb {
-  height: 60px;
-  line-height: 60px;
-  margin: auto auto auto 56px;
-  font-size: 36px;
-  color: #ffffff;
+  width: 100%;
 }
 
 /* タスクタイトル・内容共通設定 */
-.task-container,
-.text-container
- {
+.input-container {
   font-size: 24px;
-  line-height: 28px;
-  color: #000000;
-  display: flex;
   width: 70%;
-  border-bottom : 1px solid rgba(207, 199, 199, 0.8);
+  border-bottom: 1px solid rgba(207, 199, 199, 0.8);
   padding-bottom: 20px;
 }
 
@@ -59,8 +18,7 @@
   margin: 30px auto 30px 56px;
 }
 
-.task-label,
-.text-label {
+.input-area-label {
   display: inline-block;
   width: 190px;
   margin-right: 10px;
@@ -68,9 +26,10 @@
 
 /* タスクタイトル・内容高さ */
 .input {
-  width:100%;
-  background: #FFFFFF;
-  border: 1px solid #BEBABA;
+  display: inline-block;
+  width: 81%;
+  background: #ffffff;
+  border: 1px solid #bebaba;
   box-sizing: border-box;
   border-radius: 4px;
 }
@@ -85,62 +44,52 @@
   height: 233px;
 }
 
-/* ステータスコンテナ・優先度コンテナ */
-.priority-container,
-.status-container
-{
-  /* display: flex; */
+/* 優先度コンテナ */
+.select-container {
   margin: 30px auto 30px 56px;
-  font-size: 24px;
-  line-height: 28px;
-  width: 70%;
-  border-bottom: 1px solid rgba(207, 199, 199, 0.8);
-  padding-bottom: 20px;
 }
 
-/* ステータスコンテナ・優先度コンテナ */
+/* 優先度コンテナ */
 /* セレクトボックス */
-.priority-container .select-priority,
-.status-container .select-status
-{
-  background: #FFFFFF;
-  border: 1px solid #BEBABA;
+.select-box {
+  background: #ffffff;
+  border: 1px solid #bebaba;
   box-sizing: border-box;
   border-radius: 4px;
-  display: inline-block;
   width: 163px;
   height: 52px;
-  cursor: pointer;
 }
 
 /* セレクトボックスデフォルト値 */
-.priority-container .select-priority .default,
-.status-container .select-status .default {
+.select-default {
   text-align: center;
 }
 
-/* ステータス・優先度ラベル */
-.status-label,
-.priority-label {
-  margin-right: 10px;
-  display: inline-block;
-  width: 190px; 
-}
-
 /* 追加ボタン */
-.add-container {
+.btn-container {
   width: 70%;
   margin: 30px 400px 30px auto;
-  text-align: right;  
+  text-align: right;
 }
 
 .button {
-  display: inline-block;
-  width: 163px;
+  border: none;
+  width: 100px;
   height: 52px;
+  color: #ffffff;
   cursor: pointer;
+  border-radius: 6px;
 }
 
 .button:hover {
   opacity: 0.7;
+}
+
+.add-button {
+  background-color: #4e758d;
+}
+
+.back-button {
+  background-color: #84adc5;
+  margin-right: 20px;
 }
