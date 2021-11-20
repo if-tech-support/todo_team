@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import './Create.css'
+import Breadcrumb from "../components/Breadcrumb";
 
 function Create() {
   // タイトル・詳細・IDを格納する変数
@@ -10,13 +11,8 @@ function Create() {
 
   return (
     <div className="create-container">
-      <header className="header">
-        <h1 className="title">Todoアプリ</h1> 
-        {/* テスト用ぱんくずテキスト 後で動的に */}
-        <div className="bread-crumb-container">
-          <p className="bread-crumb">ホーム＞追加</p>
-        </div>
-      </header>
+      {/* {headrエリア} */}
+      <Breadcrumb breadcrumbElements={breadcrumbElements} />
 
       <div className="contents-container">
 
