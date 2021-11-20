@@ -1,0 +1,209 @@
+main {
+  max-width: 90%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* ------------------------------
+  タスク残表示
+------------------------------ */
+.task-info-area {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.task-info {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.task-info span {
+  color: #dc143c;
+}
+
+.btn-add {
+  width: 130px;
+  height: 30px;
+  color: #fff;
+  background-color: #999;
+  border: none;
+  border-radius: 10px;
+  margin-left: 20px;
+}
+
+.btn-add:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.btn-add span {
+  font-size: 20px;
+}
+
+/* ------------------------------
+  検索エリア
+------------------------------ */
+.search-area {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.search-keyword-area,
+.search-status-area,
+.search-priority-area {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-status-area,
+.search-priority-area {
+  margin-left: 20px;
+}
+
+.label-search-area {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.search-box {
+  padding: 5px;
+  border: 1px solid #a9a5a5;
+  border-radius: 5px;
+}
+
+/* ------------------------------
+  まとめて操作
+------------------------------ */
+.bulk-exection-area {
+  margin-bottom: 30px;
+}
+
+.label-bulk-exection {
+  font-weight: 600;
+}
+
+.bulk-exection-selection {
+  width: 250px;
+  padding: 5px;
+  border: 1px solid #a9a5a5;
+  border-radius: 5px;
+}
+
+.btn-bulk-exection {
+  width: 60px;
+  height: 30px;
+  font-weight: 600;
+  border: 1px solid #a9a5a5;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.btn-bulk-exection:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+/* ------------------------------
+  テーブル
+------------------------------ */
+.todo-table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.todo-table-header {
+  height: 40px;
+  background-color: #f6f6f6;
+}
+
+.todo-table-body-row {
+  height: 80px;
+  border-bottom: 1px solid #d3d3d3;
+}
+
+.btn-edit {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.22);
+  margin-left: 20px;
+}
+
+.btn-edit:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+/* ------------------------------
+  テーブル タイトル表示
+------------------------------ */
+.table-content-title {
+  color: #14689c;
+}
+
+/* ------------------------------
+  テーブル ステータス表示
+------------------------------ */
+.table-content-status {
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 25px;
+}
+
+.table-content-status-pending {
+  color: #f09338;
+  background-color: #faebdf;
+}
+
+.table-content-status-working {
+  color: #2ab4f8;
+  background-color: #e1f4fa;
+}
+
+.table-content-status-done {
+  color: #228b22;
+  background-color: #98fb98;
+}
+
+/* ------------------------------
+  テーブル 優先度表示
+------------------------------ */
+.table-content-priority-high::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  border: 3px solid #b03249;
+  border-radius: 25px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.table-content-priority-normal::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  border: 3px solid #fae7a5;
+  border-radius: 25px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.table-content-priority-low::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  border: 3px solid #5e9470;
+  border-radius: 25px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
