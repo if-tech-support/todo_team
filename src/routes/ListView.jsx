@@ -1,5 +1,8 @@
 import "../style/ListView.css";
 import Breadcrumb from "../components/Breadcrumb";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { inputState } from "../atoms/atoms";
+import { useState } from "react";
 
 // ダミーデータ
 const dummyTodoData = [
@@ -33,6 +36,15 @@ const dummyTodoData = [
 const breadcrumbElements = [{ id: 1, title: "ホーム" }];
 
 export const ListView = () => {
+  const input = useRecoilValue(inputState);
+  console.log(input);
+  const [todo, setTodo] = useRecoilState(inputState);
+  console.log(todo);
+
+  //useStateの確認
+  // const [todo2, setTodo2] = useState('');
+  // console.log(todo2)
+  
   return (
     <>
       <Breadcrumb breadcrumbElements={breadcrumbElements} />
@@ -55,6 +67,12 @@ export const ListView = () => {
               className="search-box"
               type="text"
               placeholder="キーワードを入力"
+              //recoilの確認
+              value={todo}
+              onChange={(e)=> {setTodo(e.target.value)}}
+              //useStateの確認
+              // value={todo2}
+              // onChange={(e)=> {setTodo2(e.target.value)}}
             />
           </div>
           <div className="search-priority-area">
