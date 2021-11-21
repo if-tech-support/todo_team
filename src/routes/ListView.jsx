@@ -60,9 +60,7 @@ export const ListView = () => {
           <div className="search-priority-area">
             <label className="label-search-area">ステータス</label>
             <select className="search-box">
-              <option value="all" selected>
-                すべて
-              </option>
+              <option defaultValue="all">すべて</option>
               <option value="complete">完了</option>
               <option value="working">作業中</option>
               <option value="pending">未着手</option>
@@ -71,9 +69,7 @@ export const ListView = () => {
           <div className="search-status-area">
             <label className="label-search-area">優先度</label>
             <select className="search-box">
-              <option value="all" selected>
-                すべて
-              </option>
+              <option defaultValue="all">すべて</option>
               <option value="high">高</option>
               <option value="normal">中</option>
               <option value="low">低</option>
@@ -83,9 +79,7 @@ export const ListView = () => {
         <div className="bulk-exection-area">
           <label className="label-bulk-exection">まとめて操作：</label>
           <select className="bulk-exection-selection">
-            <option value="" selected>
-              ------------
-            </option>
+            <option defaultValue="">------------</option>
             <option value="complete">完了</option>
             <option value="delete">削除</option>
           </select>
@@ -94,8 +88,9 @@ export const ListView = () => {
         <table className="todo-table">
           <thead className="todo-table-header">
             <tr>
-              <th></th>
-              <th>タスク名</th>
+              <th colSpan="3" className="todo-table-header-title">
+                タスク名
+              </th>
               <th>ステータス</th>
               <th>優先度</th>
               <th>作成日時</th>
@@ -110,8 +105,8 @@ export const ListView = () => {
                   <td>
                     <input type="checkbox" />
                   </td>
-                  <td className="table-content-title">
-                    {todo.title}
+                  <td className="table-content-title">{todo.title}</td>
+                  <td>
                     <button className="btn-edit">✎</button>
                   </td>
                   <td>

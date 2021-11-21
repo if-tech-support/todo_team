@@ -4,9 +4,9 @@ const Breadcrumb = ({ breadcrumbElements }) => {
   return (
     <nav className="breadcrumb">
       <ul className="breadcrumb-elements">
-        {breadcrumbElements.map((element) => (
-          <li key={element.id} className="breadcrumb-element">
-            {element.title}
+        {breadcrumbElements.map(({ id, title }) => (
+          <li key={id} className="breadcrumb-element">
+            {title}
           </li>
         ))}
       </ul>
