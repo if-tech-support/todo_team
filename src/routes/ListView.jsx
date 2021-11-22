@@ -1,5 +1,6 @@
 import "../style/ListView.css";
 import Breadcrumb from "../components/Breadcrumb";
+import { useState } from "react";
 
 // ダミーデータ
 const dummyTodoData = [
@@ -33,6 +34,38 @@ const dummyTodoData = [
 const breadcrumbElements = [{ id: 1, title: "ホーム" }];
 
 export const ListView = () => {
+  const [todo, setTodo] = useState(dummyTodoData);
+
+  // ステータス更新
+  const updateTodoStatus = (id) => {
+    const index = todo.findIndex((v) => v.id === id);
+    const updatedTodo = [...todo];
+    if (updatedTodo[index].status === "未着手") {
+      updatedTodo[index].status = "作業中";
+    } else if (updatedTodo[index].status === "作業中") {
+      updatedTodo[index].status = "完了";
+    } else {
+      updatedTodo[index].status = "未着手";
+    }
+
+    setTodo(updatedTodo);
+  };
+
+  // 優先度更新
+  const updateTodoPriority = (id) => {
+    const index = todo.findIndex((v) => v.id === id);
+    const updatedTodo = [...todo];
+    if (updatedTodo[index].priority === "低") {
+      updatedTodo[index].priority = "中";
+    } else if (updatedTodo[index].priority === "中") {
+      updatedTodo[index].priority = "高";
+    } else {
+      updatedTodo[index].priority = "低";
+    }
+
+    setTodo(updatedTodo);
+  };
+
   return (
     <>
       <Breadcrumb breadcrumbElements={breadcrumbElements} />
@@ -99,7 +132,7 @@ export const ListView = () => {
           </thead>
           <tbody>
             {/* ダミーデータを表示 */}
-            {dummyTodoData.map((todo) => {
+            {todo.map((todo) => {
               return (
                 <tr key={todo.id} className="todo-table-body-row">
                   <td>
@@ -111,36 +144,66 @@ export const ListView = () => {
                   </td>
                   <td>
                     {todo.status === "未着手" && (
-                      <p className="table-content-status table-content-status-pending">
+                      <button
+                        className="table-content-status table-content-status-pending"
+                        onClick={() => {
+                          updateTodoStatus(todo.id);
+                        }}
+                      >
                         {todo.status}
-                      </p>
+                      </button>
                     )}
                     {todo.status === "作業中" && (
-                      <p className="table-content-status table-content-status-working">
+                      <button
+                        className="table-content-status table-content-status-working"
+                        onClick={() => {
+                          updateTodoStatus(todo.id);
+                        }}
+                      >
                         {todo.status}
-                      </p>
+                      </button>
                     )}
                     {todo.status === "完了" && (
-                      <p className="table-content-status table-content-status-done">
+                      <button
+                        className="table-content-status table-content-status-done"
+                        onClick={() => {
+                          updateTodoStatus(todo.id);
+                        }}
+                      >
                         {todo.status}
-                      </p>
+                      </button>
                     )}
                   </td>
                   <td>
                     {todo.priority === "高" && (
-                      <p className="table-content-priority-high">
+                      <button
+                        className="table-content-priority table-content-priority-high"
+                        onClick={() => {
+                          updateTodoPriority(todo.id);
+                        }}
+                      >
                         {todo.priority}
-                      </p>
+                      </button>
                     )}
                     {todo.priority === "中" && (
-                      <p className="table-content-priority-normal">
+                      <button
+                        className="table-content-priority table-content-priority-normal"
+                        onClick={() => {
+                          updateTodoPriority(todo.id);
+                        }}
+                      >
                         {todo.priority}
-                      </p>
+                      </button>
                     )}
                     {todo.priority === "低" && (
-                      <p className="table-content-priority-low">
+                      <button
+                        className="table-content-priority table-content-priority-low"
+                        onClick={() => {
+                          updateTodoPriority(todo.id);
+                        }}
+                      >
                         {todo.priority}
-                      </p>
+                      </button>
                     )}
                   </td>
                   <td>{todo.createAt}</td>
