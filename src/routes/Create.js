@@ -1,10 +1,8 @@
 import {useState} from 'react'
-import './Create.css'
+import '../style/Create.css'
 
 function Create() {
-  // タイトル・詳細・IDt・それらを格納する変数
-  const [todoTitle, setTodoTitle] = useState("")
-  const [todoDetail, setTodoDetail] = useState("")
+  // タイトル・詳細・IDt・それらを格納する変数(state)
 
   return (
     <div className="create-container">
