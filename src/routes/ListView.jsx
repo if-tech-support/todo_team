@@ -1,69 +1,75 @@
+import { todoState } from "../atoms/atom";
+import { useRecoilState } from "recoil";
+
 import "../style/ListView.css";
 import Breadcrumb from "../components/Breadcrumb";
-import { useState } from "react";
-
-// ダミーデータ
-const dummyTodoData = [
-  {
-    id: 1,
-    title: "Github上に静的サイトをホスティングする",
-    status: "未着手",
-    priority: "低",
-    createAt: "2020-11-8 18:55:07",
-    updateAt: "2020-11-8 18:55:07",
-  },
-  {
-    id: 2,
-    title: "ReactでTodoサイトを作成する",
-    status: "完了",
-    priority: "中",
-    createAt: "2020-11-8 18:55:07",
-    updateAt: "2020-11-8 18:55:07",
-  },
-  {
-    id: 3,
-    title: "Todoサイトで画面遷移をできるようにする",
-    status: "作業中",
-    priority: "高",
-    createAt: "2020-11-8 18:55:07",
-    updateAt: "2020-11-8 18:55:07",
-  },
-];
 
 // ぱんくずデータ 画面ごとに変更する
 const breadcrumbElements = [{ id: 1, title: "ホーム" }];
 
 export const ListView = () => {
-  const [todo, setTodo] = useState(dummyTodoData);
+  // todoリストデータ
+  const [todoList, setTodoList] = useRecoilState(todoState);
 
   // ステータス更新
   const updateTodoStatus = (id) => {
-    const index = todo.findIndex((v) => v.id === id);
-    const updatedTodo = [...todo];
-    if (updatedTodo[index].status === "未着手") {
-      updatedTodo[index].status = "作業中";
-    } else if (updatedTodo[index].status === "作業中") {
-      updatedTodo[index].status = "完了";
-    } else {
-      updatedTodo[index].status = "未着手";
-    }
-
-    setTodo(updatedTodo);
+    const index = todoList.findIndex((todo) => todo.id === id);
+    setTodoList(() => {
+      switch (todoList[index].status) {
+        case "未着手":
+          return replaceItemAtIndex(todoList, index, {
+            ...todoList[index],
+            status: "作業中",
+          });
+        case "作業中":
+          return replaceItemAtIndex(todoList, index, {
+            ...todoList[index],
+            status: "完了",
+          });
+        case "完了":
+          return replaceItemAtIndex(todoList, index, {
+            ...todoList[index],
+            status: "未着手",
+          });
+        default:
+          return todoList;
+      }
+    });
   };
 
   // 優先度更新
   const updateTodoPriority = (id) => {
-    const index = todo.findIndex((v) => v.id === id);
-    const updatedTodo = [...todo];
-    if (updatedTodo[index].priority === "低") {
-      updatedTodo[index].priority = "中";
-    } else if (updatedTodo[index].priority === "中") {
-      updatedTodo[index].priority = "高";
-    } else {
-      updatedTodo[index].priority = "低";
-    }
+    const index = todoList.findIndex((todo) => todo.id === id);
+    setTodoList(() => {
+      switch (todoList[index].priority) {
+        case "低":
+          return replaceItemAtIndex(todoList, index, {
+            ...todoList[index],
+            priority: "中",
+          });
+        case "中":
+          return replaceItemAtIndex(todoList, index, {
+            ...todoList[index],
+            priority: "高",
+          });
+        case "高":
+          return replaceItemAtIndex(todoList, index, {
+            ...todoList[index],
+            priority: "低",
+          });
+        default:
+          return todoList;
+      }
+    });
+  };
 
-    setTodo(updatedTodo);
+  // 選択されたtodoを新しいtodoに入れ替える処理
+  const replaceItemAtIndex = (todoList, index, newValue) => {
+    return [
+      ...todoList.slice(0, index),
+      newValue,
+      ...todoList.slice(index + 1),
+    ];
   };
 
   return (
@@ -88,6 +94,8 @@ export const ListView = () => {
               className="search-box"
               type="text"
               placeholder="キーワードを入力"
+              value=""
+              onChange={(e) => {}}
             />
           </div>
           <div className="search-priority-area">
@@ -132,7 +140,7 @@ export const ListView = () => {
           </thead>
           <tbody>
             {/* ダミーデータを表示 */}
-            {todo.map((todo) => {
+            {todoList.map((todo) => {
               return (
                 <tr key={todo.id} className="todo-table-body-row">
                   <td>
