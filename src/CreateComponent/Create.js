@@ -2,11 +2,9 @@ import {useState} from 'react'
 import './Create.css'
 
 function Create() {
-  // タイトル・詳細・IDを格納する変数
-  const [todos, setTodos] = useState([])
+  // タイトル・詳細・IDt・それらを格納する変数
   const [todoTitle, setTodoTitle] = useState("")
   const [todoDetail, setTodoDetail] = useState("")
-  const [todoId, setTodoId] = useState(0)
 
   return (
     <div className="create-container">
@@ -17,25 +15,25 @@ function Create() {
         <div className="todo-create">
 
           <div className="task-container input-container content-container">
-            <label className="task-label input-area-label label">タスク名 :</label>
+            <label for="title" className="task-label input-area-label label">タスク名 :</label>
             <input
+                id="title"
                 className="title-input input"
                 type="text"
                 label="タイトル"
                 rows="1"
-                value={todoTitle}
                 // 入力値セットする関数を後で入れると入力可能
             />
           </div>
 
           <div className="text-container input-container content-container">
-            <label className="text-label input-area-label label">内容 :</label>
+            <label for="text" className="text-label input-area-label label">内容 :</label>
             <textarea
+                for="text"
                 className="text-input input"
                 type="text"
                 label="内容"
                 rows="20"
-                value={todoDetail}
                 // 入力値セットする関数を後で入れると入力可能
             ></textarea>
           </div>
