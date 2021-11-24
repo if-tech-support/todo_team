@@ -2,7 +2,7 @@ import "./App.css";
 
 import { Routes, Route, Link } from "react-router-dom";
 
-import  Create  from "./routes/Create";
+import { Create } from "./routes/Create";
 import { Edit } from "./routes/Edit";
 import { Detail } from "./routes/Detail";
 import { ListView } from "./routes/ListView";
