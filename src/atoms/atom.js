@@ -9,7 +9,7 @@ export const inputState = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
-export const todoState = atom({
+export const todoListState = atom({
   key: "todoState",
   default: [
     // TodoListダミーデータ

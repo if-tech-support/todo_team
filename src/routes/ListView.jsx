@@ -1,76 +1,18 @@
-import { todoState } from "../atoms/atom";
-import { useRecoilState } from "recoil";
+import useUpdateTodoState from "../hooks/useUpdateTodoState";
 
 import "../style/ListView.css";
 import Breadcrumb from "../components/Breadcrumb";
+import { useRecoilState } from "recoil";
+import { todoListState } from "../atoms/atom";
+import StatusButton from "../components/StatusButton";
+import PriorityButton from "../components/PriorityButton";
 
 // ぱんくずデータ 画面ごとに変更する
 const breadcrumbElements = [{ id: 1, title: "ホーム" }];
 
 export const ListView = () => {
   // todoリストデータ
-  const [todoList, setTodoList] = useRecoilState(todoState);
-
-  // ステータス更新
-  const updateTodoStatus = (id) => {
-    const index = todoList.findIndex((todo) => todo.id === id);
-    setTodoList(() => {
-      switch (todoList[index].status) {
-        case "未着手":
-          return replaceItemAtIndex(todoList, index, {
-            ...todoList[index],
-            status: "作業中",
-          });
-        case "作業中":
-          return replaceItemAtIndex(todoList, index, {
-            ...todoList[index],
-            status: "完了",
-          });
-        case "完了":
-          return replaceItemAtIndex(todoList, index, {
-            ...todoList[index],
-            status: "未着手",
-          });
-        default:
-          return todoList;
-      }
-    });
-  };
-
-  // 優先度更新
-  const updateTodoPriority = (id) => {
-    const index = todoList.findIndex((todo) => todo.id === id);
-    setTodoList(() => {
-      switch (todoList[index].priority) {
-        case "低":
-          return replaceItemAtIndex(todoList, index, {
-            ...todoList[index],
-            priority: "中",
-          });
-        case "中":
-          return replaceItemAtIndex(todoList, index, {
-            ...todoList[index],
-            priority: "高",
-          });
-        case "高":
-          return replaceItemAtIndex(todoList, index, {
-            ...todoList[index],
-            priority: "低",
-          });
-        default:
-          return todoList;
-      }
-    });
-  };
-
-  // 選択されたtodoを新しいtodoに入れ替える処理
-  const replaceItemAtIndex = (todoList, index, newValue) => {
-    return [
-      ...todoList.slice(0, index),
-      newValue,
-      ...todoList.slice(index + 1),
-    ];
-  };
+  const [todoList, setTodoList] = useRecoilState(todoListState);
 
   return (
     <>
@@ -151,68 +93,10 @@ export const ListView = () => {
                     <button className="btn-edit">✎</button>
                   </td>
                   <td>
-                    {todo.status === "未着手" && (
-                      <button
-                        className="table-content-status table-content-status-pending"
-                        onClick={() => {
-                          updateTodoStatus(todo.id);
-                        }}
-                      >
-                        {todo.status}
-                      </button>
-                    )}
-                    {todo.status === "作業中" && (
-                      <button
-                        className="table-content-status table-content-status-working"
-                        onClick={() => {
-                          updateTodoStatus(todo.id);
-                        }}
-                      >
-                        {todo.status}
-                      </button>
-                    )}
-                    {todo.status === "完了" && (
-                      <button
-                        className="table-content-status table-content-status-done"
-                        onClick={() => {
-                          updateTodoStatus(todo.id);
-                        }}
-                      >
-                        {todo.status}
-                      </button>
-                    )}
+                    <StatusButton todo={todo} />
                   </td>
                   <td>
-                    {todo.priority === "高" && (
-                      <button
-                        className="table-content-priority table-content-priority-high"
-                        onClick={() => {
-                          updateTodoPriority(todo.id);
-                        }}
-                      >
-                        {todo.priority}
-                      </button>
-                    )}
-                    {todo.priority === "中" && (
-                      <button
-                        className="table-content-priority table-content-priority-normal"
-                        onClick={() => {
-                          updateTodoPriority(todo.id);
-                        }}
-                      >
-                        {todo.priority}
-                      </button>
-                    )}
-                    {todo.priority === "低" && (
-                      <button
-                        className="table-content-priority table-content-priority-low"
-                        onClick={() => {
-                          updateTodoPriority(todo.id);
-                        }}
-                      >
-                        {todo.priority}
-                      </button>
-                    )}
+                    <PriorityButton todo={todo} />
                   </td>
                   <td>{todo.createAt}</td>
                   <td>{todo.updateAt}</td>
