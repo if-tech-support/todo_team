@@ -6,8 +6,6 @@ import Breadcrumb from "../components/Breadcrumb";
 import StatusButton from "../components/StatusButton";
 import PriorityButton from "../components/PriorityButton";
 
-import { TODO_PRIORITY, TODO_STATUS } from "../constants";
-
 // ぱんくずデータ 画面ごとに変更する
 const breadcrumbElements = [{ id: 1, title: "ホーム" }];
 
@@ -44,19 +42,19 @@ export const ListView = () => {
           <div className="search-priority-area">
             <label className="label-search-area">ステータス</label>
             <select className="search-box">
-              <option defaultValue="all">{TODO_STATUS.ALL}</option>
-              <option value="complete">{TODO_STATUS.DONE}</option>
-              <option value="working">{TODO_STATUS.WORKING}</option>
-              <option value="pending">{TODO_STATUS.PENDING}</option>
+              <option defaultValue="all">すべて</option>
+              <option value="complete">完了</option>
+              <option value="working">作業中</option>
+              <option value="pending">未着手</option>
             </select>
           </div>
           <div className="search-status-area">
             <label className="label-search-area">優先度</label>
             <select className="search-box">
-              <option defaultValue="all">{TODO_PRIORITY.ALL}</option>
-              <option value="high">{TODO_PRIORITY.HIGH}</option>
-              <option value="normal">{TODO_PRIORITY.NORMAL}</option>
-              <option value="low">{TODO_PRIORITY.LOW}</option>
+              <option defaultValue="all">すべて</option>
+              <option value="high">高</option>
+              <option value="normal">中</option>
+              <option value="low">低</option>
             </select>
           </div>
         </div>
