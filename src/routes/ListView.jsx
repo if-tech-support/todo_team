@@ -3,39 +3,42 @@ import Breadcrumb from "../components/Breadcrumb";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { inputState } from "../atoms/atom";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { todoListState } from "../atoms/atom";
 
 // ダミーデータ
-const dummyTodoData = [
-  {
-    id: 1,
-    title: "Github上に静的サイトをホスティングする",
-    status: "未着手",
-    priority: "低",
-    createAt: "2020-11-8 18:55:07",
-    updateAt: "2020-11-8 18:55:07",
-  },
-  {
-    id: 2,
-    title: "ReactでTodoサイトを作成する",
-    status: "完了",
-    priority: "中",
-    createAt: "2020-11-8 18:55:07",
-    updateAt: "2020-11-8 18:55:07",
-  },
-  {
-    id: 3,
-    title: "Todoサイトで画面遷移をできるようにする",
-    status: "作業中",
-    priority: "高",
-    createAt: "2020-11-8 18:55:07",
-    updateAt: "2020-11-8 18:55:07",
-  },
-];
+// const dummyTodoData = [
+//   {
+//     id: 1,
+//     title: "Github上に静的サイトをホスティングする",
+//     status: "未着手",
+//     priority: "低",
+//     createAt: "2020-11-8 18:55:07",
+//     updateAt: "2020-11-8 18:55:07",
+//   },
+//   {
+//     id: 2,
+//     title: "ReactでTodoサイトを作成する",
+//     status: "完了",
+//     priority: "中",
+//     createAt: "2020-11-8 18:55:07",
+//     updateAt: "2020-11-8 18:55:07",
+//   },
+//   {
+//     id: 3,
+//     title: "Todoサイトで画面遷移をできるようにする",
+//     status: "作業中",
+//     priority: "高",
+//     createAt: "2020-11-8 18:55:07",
+//     updateAt: "2020-11-8 18:55:07",
+//   },
+// ];
 
 // ぱんくずデータ 画面ごとに変更する
 const breadcrumbElements = [{ id: 1, title: "ホーム" }];
 
 export const ListView = () => {
+  const todoList = useRecoilValue(todoListState);
   const input = useRecoilValue(inputState);
   console.log(input);
   const [todo, setTodo] = useRecoilState(inputState);
@@ -110,13 +113,13 @@ export const ListView = () => {
           </thead>
           <tbody>
             {/* ダミーデータを表示 */}
-            {dummyTodoData.map((todo) => {
+            {todoList.map((todo) => {
               return (
                 <tr key={todo.id} className="todo-table-body-row">
                   <td>
                     <input type="checkbox" />
                   </td>
-                  <td className="table-content-title">{todo.title}</td>
+                  <td className="table-content-title"><Link to='/detail' state={{todo: todo}}>{todo.title}</Link></td>
                   <td>
                     <button className="btn-edit">✎</button>
                   </td>
