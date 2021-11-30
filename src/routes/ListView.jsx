@@ -1,49 +1,19 @@
+import { useRecoilValue } from "recoil";
+import { todoListState } from "../atoms/atom";
+import { Link } from "react-router-dom";
+
 import "../style/ListView.css";
 import Breadcrumb from "../components/Breadcrumb";
-import { useRecoilValue, useRecoilState } from "recoil";
-import { inputState } from "../atoms/atom";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { todoListState } from "../atoms/atom";
-
-// ダミーデータ
-// const dummyTodoData = [
-//   {
-//     id: 1,
-//     title: "Github上に静的サイトをホスティングする",
-//     status: "未着手",
-//     priority: "低",
-//     createAt: "2020-11-8 18:55:07",
-//     updateAt: "2020-11-8 18:55:07",
-//   },
-//   {
-//     id: 2,
-//     title: "ReactでTodoサイトを作成する",
-//     status: "完了",
-//     priority: "中",
-//     createAt: "2020-11-8 18:55:07",
-//     updateAt: "2020-11-8 18:55:07",
-//   },
-//   {
-//     id: 3,
-//     title: "Todoサイトで画面遷移をできるようにする",
-//     status: "作業中",
-//     priority: "高",
-//     createAt: "2020-11-8 18:55:07",
-//     updateAt: "2020-11-8 18:55:07",
-//   },
-// ];
+import StatusButton from "../components/StatusButton";
+import PriorityButton from "../components/PriorityButton";
 
 // ぱんくずデータ 画面ごとに変更する
 const breadcrumbElements = [{ id: 1, title: "ホーム" }];
 
 export const ListView = () => {
+  // todoリストデータ
   const todoList = useRecoilValue(todoListState);
-  const input = useRecoilValue(inputState);
-  console.log(input);
-  const [todo, setTodo] = useRecoilState(inputState);
-  console.log(todo);
-  
+
   return (
     <>
       <Breadcrumb breadcrumbElements={breadcrumbElements} />
@@ -66,9 +36,8 @@ export const ListView = () => {
               className="search-box"
               type="text"
               placeholder="キーワードを入力"
-              value={todo}
-              onChange={(e)=> {setTodo(e.target.value)}}
-
+              value=""
+              onChange={(e) => {}}
             />
           </div>
           <div className="search-priority-area">
@@ -124,38 +93,10 @@ export const ListView = () => {
                     <button className="btn-edit">✎</button>
                   </td>
                   <td>
-                    {todo.status === "未着手" && (
-                      <p className="table-content-status table-content-status-pending">
-                        {todo.status}
-                      </p>
-                    )}
-                    {todo.status === "作業中" && (
-                      <p className="table-content-status table-content-status-working">
-                        {todo.status}
-                      </p>
-                    )}
-                    {todo.status === "完了" && (
-                      <p className="table-content-status table-content-status-done">
-                        {todo.status}
-                      </p>
-                    )}
+                    <StatusButton todo={todo} />
                   </td>
                   <td>
-                    {todo.priority === "高" && (
-                      <p className="table-content-priority-high">
-                        {todo.priority}
-                      </p>
-                    )}
-                    {todo.priority === "中" && (
-                      <p className="table-content-priority-normal">
-                        {todo.priority}
-                      </p>
-                    )}
-                    {todo.priority === "低" && (
-                      <p className="table-content-priority-low">
-                        {todo.priority}
-                      </p>
-                    )}
+                    <PriorityButton todo={todo} />
                   </td>
                   <td>{todo.createAt}</td>
                   <td>{todo.updateAt}</td>

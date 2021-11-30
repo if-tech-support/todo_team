@@ -1,76 +1,40 @@
 /* すべての項目が入るコンテナ */
-.create-container {
+.detail-container {
     width: 80%;
     padding: 70px 0 30px 56px;
   }
   
   /* 各項目の入るコンテナ */
-  .content-container {
-    padding: 30px 0;
+.content-container {
     display: flex;
-  }
-  
-  /* タスクタイトル・内容共通設定 */
-  .input-container {
-    font-size: 24px;
     border-bottom: 1px solid rgba(207, 199, 199, 0.8);
-    padding-bottom: 20px;
+    padding: 10px;
   }
-  
-  /* input・textarea・selectのラベル */
-  .task-content {
-    display: inline-block;
-    width: 190px;
-    margin-right: 10px;
+
+  /*  */
+  .field-name{
+    font-size: 24px;
+    width:200px;
   }
-  
-  /* タスクタイトル・内容高さ */
-  .task-title {
+
+  .field-description {
     width: 81%;
     border: 1px solid #bebaba;
     box-sizing: border-box;
-    border-radius: 4px;
-  }
-  
-  /* 優先度コンテナ */
-  /* セレクトボックス */
-  .select-box {
-    border: 1px solid #bebaba;
-    box-sizing: border-box;
-    border-radius: 4px;
-    width: 163px;
-    height: 52px;
-  }
-  
-  .select-box .option {
-    text-align: center;
-  }
-  
-  /* セレクトボックスデフォルト値 */
-  .select-default {
-    text-align: center;
-  }
-  
-  /* 追加ボタン */
-  .btn-container {
-    justify-content: right;
+    border-radius: 4px;  
+    padding: 5px 6px;
   }
   
   .button {
     border: none;
     width: 100px;
     height: 52px;
-    color: #ffffff;
     cursor: pointer;
     border-radius: 6px;
   }
   
   .button:hover {
     opacity: 0.7;
-  }
-  
-  .add-button {
-    background-color: #4e758d;
   }
   
   .back-button {
