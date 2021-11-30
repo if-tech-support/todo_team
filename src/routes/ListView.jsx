@@ -1,7 +1,6 @@
 import { useRecoilValue } from "recoil";
 import { todoListState } from "../atoms/atom";
 import { Link } from "react-router-dom";
-
 import "../style/ListView.css";
 import Breadcrumb from "../components/Breadcrumb";
 import StatusButton from "../components/StatusButton";
