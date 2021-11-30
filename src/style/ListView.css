@@ -159,6 +159,7 @@ main {
   line-height: 30px;
   text-align: center;
   border-radius: 25px;
+  border: none;
 }
 
 .table-content-status-pending {
@@ -179,6 +180,11 @@ main {
 /* ------------------------------
   テーブル 優先度表示
 ------------------------------ */
+.table-content-priority {
+  border: none;
+  background-color: transparent;
+}
+
 .table-content-priority-high::before {
   content: "";
   width: 20px;
