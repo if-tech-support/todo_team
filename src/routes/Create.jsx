@@ -1,9 +1,21 @@
 import Breadcrumb from "../components/Breadcrumb";
 import '../style/Create.css';
 import { Link } from "react-router-dom";
-import {useState} from 'react'; 
+import {useState} from 'react';
+import { useRecoilValue, useRecoilState } from "recoil";
+import { inputState } from "../atoms/atom";
 
-// ぱんくずデータ 画面ごとに変更する
+// やることメモ
+// inputTodosに各入力値をまとめる
+// 済 atom(inputStateコンポーネント)からデータ取得
+// 済 useRecoilState使ってるけど入らない。→stateが更新される前に
+// 済 atomからtodoList取得して古いデータに新しいデータ追加するようにする。なぜか前に入れたデータが保持されていない→間違えて入力データをolddataとして扱っていたため
+// 一意のidで登録する
+// 済 追加ボタン押下時にatomにtodo保存
+// 済 ボタン押下後に一覧画面に遷移
+// form,inputgroup hooksを使う(バリデーションのため)
+
+// ぱんくず
 const breadcrumbElements = [
   { id: 1, title: "ホーム" },
   { id: 2, title: "追加" },
@@ -11,83 +23,67 @@ const breadcrumbElements = [
 
 export const Create = () => {
   // タイトル・詳細・IDt・それらを格納する変数(state)
-  const [todos, setTodos] = useState([])
+  const [inputTodos, setTodos] = useState([])
   const [todoTitle, setTodoTitle] = useState('')
   const [todoDetail, setTodoDetail] = useState('')
   const [todoId, setTodoId] = useState(0)
   const [todoPriority, setTodoPriority] = useState('低')
-  // 現在日時取得
-  const [current, setcurrent] = useState('初期値')
+
+  // recoilでtodoデータを状態管理
+  const [todo, setTodoList] = useRecoilState(inputState)
+  const oldData = useRecoilValue(inputState)
 
   // タイトルをstateにセット
-  const handleAddFormChangesForTitle = e => {
-    console.log('タイトル取得チェック')
+  const getTitle = e => {
     setTodoTitle(e.target.value)
   }
+
     // 内容をstateにセット
-  const handleAddFormChangesForDetail = e => {
-    console.log('内容取得チェック')
+  const getDetail = e => {
     setTodoDetail(e.target.value)
   }
+
     // 優先度をstateにセット
-  const handleAddFormChangesForPriority = e => {
-    console.log('優先度取得チェック')
-    console.log(e.target.value)
+  const getPriority = e => {
     setTodoPriority(e.target.value)
   }
-  //  // 入力欄のリセット
-  //  const resetFormInput = () => {
-  //   console.log('リセットチェック')
-	// 	setTodoTitle("")
-  //   setTodoDetail("")
-	// }
+
   // todos配列にliタグのIDを追加
   const addTodo = () => {
-    handleAddNowDate()
-    // 現在日時取得終わってtodoにcurrentセットできるように処理かえる
-    // DBから普通とるから時間かけない
-    console.log('追加チェック')
-    console.log(current)
-		
-    // resetFormInput()
-  }
-
-  const handleAddNowDate = () => {
-    // 修正必要：頭の0抜けてる
+    // 作成・更新日時作成
     const nowDate = new Date()
-    // console.log(typeof nowDate)
     const year = nowDate.getFullYear()
-    // console.log(typeof year)
     const month = nowDate.getMonth()+1
     const day = nowDate.getDate()
     const hour = nowDate.getHours()
     const minute = nowDate.getMinutes()
     const second = nowDate.getSeconds()
     const today = year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second
+ 
+    //  入力データをstate(todos)に代入
+    const inputTodosForInput = [...oldData, { id: todoId, title: todoTitle, detail: todoDetail, priority: todoPriority, updatedAt:today, createdAt:today }]
+    
+    setTodoId(todoId + 1)
+		
+    setTodoList(inputTodosForInput)
+  }
 
-    setcurrent(today)
-    console.log(today)
-    setTodos([...todos, { id: todoId, title: todoTitle, detail: todoDetail, priority: todoPriority, createdAt:current }])
-		setTodoId(todoId + 1)
-  };
+  // 一意のidを作る
+  //   const getId = () => {
+  //   oldData.map((data) => {
+  //     // console.log(data.id)
+  //     const idArray = []
+  //     idArray.push(data.id)
+  //     // console.log(idArray)
+        //  const id = Math.max(idArray)
+  //     return id
+  //   })
+  // }
 
   return (
   <>
-    {/* {headrエリア} */}
     <Breadcrumb breadcrumbElements={breadcrumbElements} />
     
-    {/* テストエリア */}
-    <ul className="todo">
-        {todos.map(todo => (
-          <li key={todo.id}>
-            <p>test-area</p>
-            {/* 作成時刻がなぜか00:00:00で初期値に */}
-            <span>ID:{todo.id}, タイトル：{todo.title}, 内容：{todo.detail}, 優先度:{todo.priority}, 作成日時：{todo.createdAt}</span>
-            {/* <button onClick={() => handleDeleteTodo(todo)}>削除</button> */}
-          </li>
-        ))}
-      </ul>
-    {/* テストエリア */}
     <div className='create-container'>
 
       <div className='contents-container'>
@@ -102,7 +98,7 @@ export const Create = () => {
               type='text'
               rows='1'
               value={todoTitle}
-              onChange={handleAddFormChangesForTitle}
+              onChange={getTitle}
             />
           </div>
 
@@ -116,7 +112,7 @@ export const Create = () => {
               type='text'
               rows='20'
               value={todoDetail}
-              onChange={handleAddFormChangesForDetail}
+              onChange={getDetail}
             ></textarea>
           </div>
 
@@ -124,7 +120,7 @@ export const Create = () => {
             <label className='priority-label input-area-label label'>
               優先度 :
             </label>
-            <select className='select-priority select-box' onChange={handleAddFormChangesForPriority}>
+            <select className='select-priority select-box' onChange={getPriority}>
               <option className='select-default option'>
                 --------------------
               </option>
@@ -135,11 +131,12 @@ export const Create = () => {
           </div>
 
           <div className='btn-container content-container'>
-            <button className='back-button button'>
-              <Link to='/'>戻る</Link>
-            </button>
-            {/* テスト用テキスト 追加/保存(編集)ボタンを動的に切り替える */}
-            <button className='add-button button' onClick={addTodo}>追加</button>
+            <Link to='/'>
+              <button className='back-button button'>戻る</button>
+            </Link>
+            <Link to='/'>
+              <button className='add-button button' onClick={addTodo}>追加</button>
+            </Link>
           </div>
         </div>
       </div>
