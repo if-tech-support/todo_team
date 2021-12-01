@@ -3,6 +3,7 @@ import Breadcrumb from "../components/Breadcrumb";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { inputState } from "../atoms/atom";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // ダミーデータ
 const dummyTodoData = [
@@ -49,9 +50,11 @@ export const ListView = () => {
           <p className="task-info">
             進行中のタスクは<span>3個</span>あります
           </p>
-          <button className="btn-add">
-            <span>+</span>タスクを追加
-          </button>
+          <Link to="create">
+            <button className="btn-add">
+              <span>+</span>タスクを追加
+            </button>
+          </Link>
         </div>
         <div className="search-area">
           <div className="search-keyword-area">

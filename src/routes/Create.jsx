@@ -5,16 +5,6 @@ import {useState} from 'react';
 import { useRecoilValue, useRecoilState } from "recoil";
 import { inputState } from "../atoms/atom";
 
-// やることメモ
-// inputTodosに各入力値をまとめる
-// 済 atom(inputStateコンポーネント)からデータ取得
-// 済 useRecoilState使ってるけど入らない。→stateが更新される前に
-// 済 atomからtodoList取得して古いデータに新しいデータ追加するようにする。なぜか前に入れたデータが保持されていない→間違えて入力データをolddataとして扱っていたため
-// 一意のidで登録する
-// 済 追加ボタン押下時にatomにtodo保存
-// 済 ボタン押下後に一覧画面に遷移
-// form,inputgroup hooksを使う(バリデーションのため)
-
 // ぱんくず
 const breadcrumbElements = [
   { id: 1, title: "ホーム" },
@@ -33,9 +23,11 @@ export const Create = () => {
   const [todo, setTodoList] = useRecoilState(inputState)
   const oldData = useRecoilValue(inputState)
 
-  // タイトルをstateにセット
+  // タイトル・idをstateにセット
   const getTitle = e => {
     setTodoTitle(e.target.value)
+
+    getId()
   }
 
     // 内容をstateにセット
@@ -63,22 +55,26 @@ export const Create = () => {
     //  入力データをstate(todos)に代入
     const inputTodosForInput = [...oldData, { id: todoId, title: todoTitle, detail: todoDetail, priority: todoPriority, updatedAt:today, createdAt:today }]
     
-    setTodoId(todoId + 1)
-		
     setTodoList(inputTodosForInput)
   }
 
-  // 一意のidを作る
-  //   const getId = () => {
-  //   oldData.map((data) => {
-  //     // console.log(data.id)
-  //     const idArray = []
-  //     idArray.push(data.id)
-  //     // console.log(idArray)
-        //  const id = Math.max(idArray)
-  //     return id
-  //   })
-  // }
+  // 一意のid作成
+  const getMaxIdInArray = (a, b) => {
+    return Math.max(a, b)
+  }
+  const getId = () => {
+      let res = oldData.map((data) => {
+      const idArray = []
+      // idだけ取得
+      idArray.push(data.id)
+      
+      return idArray
+    })
+
+    let maxId = res.reduce(getMaxIdInArray)
+
+    setTodoId(maxId+1)
+  }
 
   return (
   <>
