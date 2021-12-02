@@ -2,7 +2,7 @@ import Breadcrumb from "../components/Breadcrumb";
 import '../style/Create.css';
 import { Link } from "react-router-dom";
 import {useState} from 'react';
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { inputState } from "../atoms/atom";
 
 // ぱんくず
@@ -12,35 +12,20 @@ const breadcrumbElements = [
 ];
 
 export const Create = () => {
-  // タイトル・詳細・IDt・それらを格納する変数(state)
-  const [inputTodos, setTodos] = useState([])
-  const [todoTitle, setTodoTitle] = useState('')
-  const [todoDetail, setTodoDetail] = useState('')
-  const [todoId, setTodoId] = useState(0)
-  const [todoPriority, setTodoPriority] = useState('低')
-
   // recoilでtodoデータを状態管理
-  const [todo, setTodoList] = useRecoilState(inputState)
-  const oldData = useRecoilValue(inputState)
+  const [todoList, setTodoList] = useRecoilState(inputState)
+  // 追加するtodoデータ
+  const [inputTodo, setInputTodo] = useState({
+     id: todoList.length,
+     title:'',
+     detail:'',
+     status: "未着手",
+     priority:'',
+     createdAt:'',
+     updatedAt:'',
+  })
 
-  // タイトル・idをstateにセット
-  const getTitle = e => {
-    setTodoTitle(e.target.value)
-
-    getId()
-  }
-
-    // 内容をstateにセット
-  const getDetail = e => {
-    setTodoDetail(e.target.value)
-  }
-
-    // 優先度をstateにセット
-  const getPriority = e => {
-    setTodoPriority(e.target.value)
-  }
-
-  // todos配列にliタグのIDを追加
+  // 追加ボタン押下時に呼び出し
   const addTodo = () => {
     // 作成・更新日時作成
     const nowDate = new Date()
@@ -51,29 +36,9 @@ export const Create = () => {
     const minute = nowDate.getMinutes()
     const second = nowDate.getSeconds()
     const today = year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second
- 
-    //  入力データをstate(todos)に代入
-    const inputTodosForInput = [...oldData, { id: todoId, title: todoTitle, detail: todoDetail, priority: todoPriority, updatedAt:today, createdAt:today }]
-    
-    setTodoList(inputTodosForInput)
-  }
 
-  // 一意のid作成
-  const getMaxIdInArray = (a, b) => {
-    return Math.max(a, b)
-  }
-  const getId = () => {
-      let res = oldData.map((data) => {
-      const idArray = []
-      // idだけ取得
-      idArray.push(data.id)
-      
-      return idArray
-    })
-
-    let maxId = res.reduce(getMaxIdInArray)
-
-    setTodoId(maxId+1)
+    // 既存のtodoデータに新たにtodoデータ(入力データ)を追加する
+    setTodoList([...todoList, {...inputTodo, ...{createdAt:today, updatedAt:today} }])
   }
 
   return (
@@ -93,8 +58,7 @@ export const Create = () => {
               className='title-input input'
               type='text'
               rows='1'
-              value={todoTitle}
-              onChange={getTitle}
+              onChange={ (e) => setInputTodo({...inputTodo,title: e.target.value}) }
             />
           </div>
 
@@ -107,8 +71,7 @@ export const Create = () => {
               className='text-input input'
               type='text'
               rows='20'
-              value={todoDetail}
-              onChange={getDetail}
+              onChange={ (e) => setInputTodo({...inputTodo,detail:e.target.value}) }
             ></textarea>
           </div>
 
@@ -116,13 +79,18 @@ export const Create = () => {
             <label className='priority-label input-area-label label'>
               優先度 :
             </label>
-            <select className='select-priority select-box' onChange={getPriority}>
+            <select 
+              className='select-priority select-box' 
+              onChange={ (e) => {setInputTodo({...inputTodo, priority:e.target.value})
+              console.log(e.target.value)
+            }}
+            >
               <option className='select-default option'>
                 --------------------
               </option>
-              <option className='high option'>高</option>
-              <option className='middle option'>中</option>
-              <option className='low option'>低</option>
+              <option className='high option' value='高'>高</option>
+              <option className='middle option'value='中'>中</option>
+              <option className='low option'value='低'>低</option>
             </select>
           </div>
 
