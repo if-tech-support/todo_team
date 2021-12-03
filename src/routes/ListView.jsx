@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import { todoListState } from "../atoms/atom";
+import { inputState } from "../atoms/atom";
 
 import "../style/ListView.css";
 import Breadcrumb from "../components/Breadcrumb";
@@ -12,7 +12,7 @@ const breadcrumbElements = [{ id: 1, title: "ホーム" }];
 
 export const ListView = () => {
   // todoリストデータ
-  const todoList = useRecoilValue(todoListState);
+  const todoList = useRecoilValue(inputState);
 
   return (
     <>
@@ -100,8 +100,8 @@ export const ListView = () => {
                   <td>
                     <PriorityButton todo={todo} />
                   </td>
-                  <td>{todo.createAt}</td>
-                  <td>{todo.updateAt}</td>
+                  <td>{todo.createdAt}</td>
+                  <td>{todo.updatedAt}</td>
                 </tr>
               );
             })}
