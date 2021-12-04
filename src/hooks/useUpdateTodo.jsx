@@ -1,7 +1,7 @@
 import { todoListState } from "../atoms/atom";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router";
-import { createUpdateTime } from "../utilities/createUpdateTime";
+import { createUpdateTime } from "../utilities";
 
 const useUpdateTodo = () => {
   // todoリストデータ
