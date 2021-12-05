@@ -1,9 +1,10 @@
 import Breadcrumb from "../components/Breadcrumb";
-import '../style/Create.css';
+import "../style/Create.css";
 import { Link } from "react-router-dom";
-import {useState} from 'react';
+import {useState} from "react";
 import { useRecoilState } from "recoil";
-import { inputState } from "../atoms/atom";
+import { todoListState } from "../atoms/atom";
+import { CreateUpdateTime } from "../utilities/CreateUpdateTime";
 
 // ぱんくず
 const breadcrumbElements = [
@@ -13,10 +14,30 @@ const breadcrumbElements = [
 
 export const Create = () => {
   // recoilでtodoデータを状態管理
-  const [todoList, setTodoList] = useRecoilState(inputState)
+  const [todoList, setTodoList] = useRecoilState(todoListState)
+
+  const getInputId = () => {
+     const res = todoList.map((todo) => {
+      // idだけ取得
+      const idArray = []
+      idArray.push(todo.id)
+      
+      return idArray
+    })
+
+    // todoデータが空の場合のため初期値：0を設定
+    const maxId = res.reduce( (a, b) => {
+      return Math.max(a, b)
+    }, 0)
+
+    return maxId+1
+  }
+
   // 追加するtodoデータ
   const [inputTodo, setInputTodo] = useState({
-     id: todoList.length,
+    // idは+1とかせんと重なってる。なにもデータないとき0とれる？
+    //  id: todoList.length,
+     id: getInputId(),
      title:'',
      detail:'',
      status: "未着手",
@@ -28,14 +49,7 @@ export const Create = () => {
   // 追加ボタン押下時に呼び出し
   const addTodo = () => {
     // 作成・更新日時作成
-    const nowDate = new Date()
-    const year = nowDate.getFullYear()
-    const month = nowDate.getMonth()+1
-    const day = nowDate.getDate()
-    const hour = nowDate.getHours()
-    const minute = nowDate.getMinutes()
-    const second = nowDate.getSeconds()
-    const today = year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second
+    const today = CreateUpdateTime()
 
     // 既存のtodoデータに新たにtodoデータ(入力データ)を追加する
     setTodoList([...todoList, {...inputTodo, ...{createdAt:today, updatedAt:today} }])
@@ -82,7 +96,6 @@ export const Create = () => {
             <select 
               className='select-priority select-box' 
               onChange={ (e) => {setInputTodo({...inputTodo, priority:e.target.value})
-              console.log(e.target.value)
             }}
             >
               <option className='select-default option'>
