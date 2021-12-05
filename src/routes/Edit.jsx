@@ -5,6 +5,7 @@ import { useLocation } from "react-router";
 import Breadcrumb from "../components/Breadcrumb";
 import "../style/Edit.css";
 import useUpdateTodo from "../hooks/useUpdateTodo";
+import useDeleteTodo from "../hooks/useDeleteTodo";
 
 // ぱんくずデータ 画面ごとに変更する
 const breadcrumbElements = [
@@ -23,7 +24,10 @@ export const Edit = () => {
   const [todo, setTodo] = useState(targetTodo);
 
   // Todo更新用カスタムフック
-  const { updateTodo, deleteTodo } = useUpdateTodo();
+  const { updateTodo } = useUpdateTodo();
+
+  // Todo削除用カスタムフック
+  const { deleteTodo } = useDeleteTodo();
 
   return (
     <>
@@ -103,6 +107,8 @@ export const Edit = () => {
             className="edit__btn edit__btn-delete"
             onClick={() => {
               deleteTodo(todo.id);
+
+              navigation("/");
             }}
           >
             削除
@@ -119,6 +125,8 @@ export const Edit = () => {
             className="edit__btn edit__btn-save"
             onClick={() => {
               updateTodo(todo.id, todo);
+
+              navigation("/");
             }}
           >
             保存

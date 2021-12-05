@@ -1,22 +1,21 @@
 import { todoListState } from "../atoms/atom";
 import { useRecoilState } from "recoil";
-import { currentDateFormatter } from "../utils/currentDateFormatter";
 
-const useUpdateTodo = () => {
+const useDeleteTodo = () => {
   // todoリストデータ
   const [todoList, setTodoList] = useRecoilState(todoListState);
 
-  // リストアイテムの更新
-  const updateTodo = (id, todo) => {
+  // リストアイテムの削除
+  const deleteTodo = (id) => {
     // todoデータのインデックス
     const index = todoList.findIndex((todo) => todo.id === Number(id));
 
     const newTodoList = [...todoList];
-    newTodoList[index] = { ...todo, updateAt: currentDateFormatter() };
+    newTodoList.splice(index, 1);
     setTodoList(newTodoList);
   };
 
-  return { updateTodo };
+  return { deleteTodo };
 };
 
-export default useUpdateTodo;
+export default useDeleteTodo;

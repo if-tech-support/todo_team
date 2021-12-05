@@ -1,4 +1,4 @@
-export const createUpdateTime = () => {
+export const currentDateFormatter = () => {
   // 2桁0埋め処理
   const paddingZero = (num) => {
     return ("00" + num).slice(-2);
