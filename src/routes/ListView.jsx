@@ -5,6 +5,7 @@ import "../style/ListView.css";
 import Breadcrumb from "../components/Breadcrumb";
 import StatusButton from "../components/StatusButton";
 import PriorityButton from "../components/PriorityButton";
+import { useNavigate } from "react-router";
 
 // ぱんくずデータ 画面ごとに変更する
 const breadcrumbElements = [{ id: 1, title: "ホーム" }];
@@ -12,6 +13,9 @@ const breadcrumbElements = [{ id: 1, title: "ホーム" }];
 export const ListView = () => {
   // todoリストデータ
   const todoList = useRecoilValue(todoListState);
+
+  // 画面遷移用のフック
+  const navigate = useNavigate();
 
   return (
     <>
@@ -89,7 +93,16 @@ export const ListView = () => {
                   </td>
                   <td className="table-content-title">{todo.title}</td>
                   <td>
-                    <button className="btn-edit">✎</button>
+                    <button
+                      className="btn-edit"
+                      onClick={() => {
+                        navigate(`edit/${todo.id}`, {
+                          state: { targetTodo: todo },
+                        });
+                      }}
+                    >
+                      ✎
+                    </button>
                   </td>
                   <td>
                     <StatusButton todo={todo} />
