@@ -23,7 +23,17 @@ export const ListView = () => {
       <main>
         <div className="task-info-area">
           <p className="task-info">
-            進行中のタスクは<span>3個</span>あります
+            進行中のタスクは
+            {todoList.filter((todo) => todo.status !== "完了").length !== 0 ? (
+              <>
+                <span>
+                  {todoList.filter((todo) => todo.status !== "完了").length}個
+                </span>
+                あります
+              </>
+            ) : (
+              "ありません"
+            )}
           </p>
           <button className="btn-add">
             <span>+</span>タスクを追加
