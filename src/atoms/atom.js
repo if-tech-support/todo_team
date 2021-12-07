@@ -34,7 +34,8 @@ export const todoListState = atom({
     {
       id: 3,
       title: "Todoサイトで画面遷移をできるようにする",
-      detail:"ハンズオンに従って実装してみる、余裕があればカスタマイズしてみる",
+      detail:
+        "ハンズオンに従って実装してみる、余裕があればカスタマイズしてみる",
       status: "作業中",
       priority: "高",
       createAt: "2020-11-8 18:55:07",

@@ -1,0 +1,95 @@
+/* ------------------------------
+  編集フォーム
+------------------------------ */
+.edit__input-form {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.edit__input-list {
+  padding: 20px 0;
+  border-bottom: 1px solid #cfc7c7;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.edit__input-list dt {
+  width: 10%;
+  display: flex;
+  align-items: center;
+}
+
+.edit__input-list dd {
+  width: 90%;
+  margin: 0;
+}
+
+/* ------------------------------
+  編集フォーム ラベル
+------------------------------ */
+.edit__label {
+  font-size: 18px;
+}
+
+.edit__label-detail {
+  align-self: flex-start;
+}
+
+/* ------------------------------
+  編集フォーム 入力
+------------------------------ */
+.edit__input {
+  padding: 10px;
+  border: 1px solid #bebaba;
+  border-radius: 4px;
+}
+
+.edit__input-title,
+.edit__input-detail {
+  width: 80%;
+}
+
+.edit__select-priority,
+.edit__select-status {
+  width: 150px;
+}
+
+/* ------------------------------
+  ボタン
+------------------------------ */
+.edit__btn-area {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.edit__btn {
+  width: 80px;
+  height: 40px;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+}
+
+.edit__btn:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.edit__btn:nth-of-type(n + 2) {
+  margin-left: 10px;
+}
+
+.edit__btn-delete {
+  background-color: #ab312a;
+}
+
+.edit__btn-return {
+  background-color: #4e758d;
+}
+
+.edit__btn-save {
+  background-color: #84adc5;
+}
