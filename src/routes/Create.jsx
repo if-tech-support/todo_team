@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import {useState} from "react";
 import { useRecoilState } from "recoil";
 import { todoListState } from "../atoms/atom";
-import { CreateUpdateTime } from "../utilities/CreateUpdateTime";
+import { currentDateFormatter } from "../utils/currentDateFormatter";
+import { getInputId } from '../utils/getInputId'
 
 // ぱんくず
 const breadcrumbElements = [
@@ -16,43 +17,23 @@ export const Create = () => {
   // recoilでtodoデータを状態管理
   const [todoList, setTodoList] = useRecoilState(todoListState)
 
-  const getInputId = () => {
-     const res = todoList.map((todo) => {
-      // idだけ取得
-      const idArray = []
-      idArray.push(todo.id)
-      
-      return idArray
-    })
-
-    // todoデータが空の場合のため初期値：0を設定
-    const maxId = res.reduce( (a, b) => {
-      return Math.max(a, b)
-    }, 0)
-
-    return maxId+1
-  }
-
   // 追加するtodoデータ
   const [inputTodo, setInputTodo] = useState({
-    // idは+1とかせんと重なってる。なにもデータないとき0とれる？
-    //  id: todoList.length,
-     id: getInputId(),
      title:'',
      detail:'',
      status: "未着手",
      priority:'',
-     createdAt:'',
-     updatedAt:'',
   })
 
   // 追加ボタン押下時に呼び出し
   const addTodo = () => {
     // 作成・更新日時作成
-    const today = CreateUpdateTime()
+    const today = currentDateFormatter()
+    // id作成
+    const id = getInputId(todoList)
 
     // 既存のtodoデータに新たにtodoデータ(入力データ)を追加する
-    setTodoList([...todoList, {...inputTodo, ...{createdAt:today, updatedAt:today} }])
+    setTodoList([...todoList, {...inputTodo, id:id, createAt:today, updateAt:today} ])
   }
 
   return (
@@ -64,7 +45,7 @@ export const Create = () => {
       <div className='contents-container'>
         <div className='todo-create'>
           <div className='task-container input-container content-container'>
-            <label for='title' className='task-label input-area-label label'>
+            <label htmlFor='title' className='task-label input-area-label label'>
               タスク名 :
             </label>
             <input
@@ -81,7 +62,7 @@ export const Create = () => {
               内容 :
             </label>
             <textarea
-              for='text'
+              id='text'
               className='text-input input'
               type='text'
               rows='20'
@@ -94,6 +75,7 @@ export const Create = () => {
               優先度 :
             </label>
             <select 
+              name='priority'
               className='select-priority select-box' 
               onChange={ (e) => {setInputTodo({...inputTodo, priority:e.target.value})
             }}
