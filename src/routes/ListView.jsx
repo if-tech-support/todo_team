@@ -14,7 +14,7 @@ const breadcrumbElements = [{ id: 1, title: "ホーム" }];
 export const ListView = () => {
   // todoリストデータ
   const todoList = useRecoilValue(todoListState);
-console.log(todoList)
+
   // 画面遷移用のフック
   const navigate = useNavigate();
 

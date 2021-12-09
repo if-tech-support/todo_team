@@ -58,7 +58,7 @@ export const Create = () => {
           </div>
 
           <div className='text-container input-container content-container'>
-            <label for='text' className='text-label input-area-label label'>
+            <label htmlFor='text' className='text-label input-area-label label'>
               内容 :
             </label>
             <textarea
