@@ -25,7 +25,7 @@ export const todoListState = atom({
     {
       id: 2,
       title: "ReactでTodoサイトを作成する",
-      detail: "ハンズオンに従って実装してみる",
+      detail: "ハンズオンに従って実装する",
       status: "完了",
       priority: "中",
       createAt: "2020-11-8 18:55:07",

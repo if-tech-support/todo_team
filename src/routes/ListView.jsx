@@ -5,6 +5,7 @@ import "../style/ListView.css";
 import Breadcrumb from "../components/Breadcrumb";
 import StatusButton from "../components/StatusButton";
 import PriorityButton from "../components/PriorityButton";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 
 // ぱんくずデータ 画面ごとに変更する
@@ -35,9 +36,11 @@ export const ListView = () => {
               "ありません"
             )}
           </p>
-          <button className="btn-add">
-            <span>+</span>タスクを追加
-          </button>
+          <Link to="create">
+            <button className="btn-add">
+              <span>+</span>タスクを追加
+            </button>
+          </Link>
         </div>
         <div className="search-area">
           <div className="search-keyword-area">
