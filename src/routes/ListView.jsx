@@ -5,7 +5,6 @@ import "../style/ListView.css";
 import Breadcrumb from "../components/Breadcrumb";
 import StatusButton from "../components/StatusButton";
 import PriorityButton from "../components/PriorityButton";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 
 // ぱんくずデータ 画面ごとに変更する
@@ -104,7 +103,11 @@ export const ListView = () => {
                   <td>
                     <input type="checkbox" />
                   </td>
-                  <td className="table-content-title"><Link to='/detail' state={{todo: todo}}>{todo.title}</Link></td>
+                  <td className="table-content-title">
+                    <Link to="/detail" state={{ todo: todo }}>
+                      {todo.title}
+                    </Link>
+                  </td>
                   <td>
                     <button
                       className="btn-edit"
