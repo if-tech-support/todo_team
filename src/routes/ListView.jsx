@@ -7,6 +7,7 @@ import StatusButton from "../components/StatusButton";
 import PriorityButton from "../components/PriorityButton";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import SortTaskButton from "../components/SortTaskButton"
 
 // ぱんくずデータ 画面ごとに変更する
 const breadcrumbElements = [{ id: 1, title: "ホーム" }];
@@ -88,12 +89,21 @@ export const ListView = () => {
           <thead className="todo-table-header">
             <tr>
               <th colSpan="3" className="todo-table-header-title">
+                <SortTaskButton sortKey={'title'}/>
                 タスク名
               </th>
-              <th>ステータス</th>
-              <th>優先度</th>
-              <th>作成日時</th>
-              <th>更新日時</th>
+              <th>
+                <SortTaskButton sortKey={"status"} />
+                ステータス</th>
+              <th>
+                <SortTaskButton sortKey={"priority"} />
+                優先度</th>
+              <th>
+                <SortTaskButton sortKey={"createAt"} />
+                作成日時</th>
+              <th>
+                <SortTaskButton sortKey={"updateAt"} />
+                更新日時</th>
             </tr>
           </thead>
           <tbody>
