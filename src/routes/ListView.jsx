@@ -1,19 +1,12 @@
 import { useRecoilValue } from "recoil";
 import { todoListState } from "../atoms/atom";
-<<<<<<< HEAD
-import { Link } from "react-router-dom";
-=======
->>>>>>> 17ef3eeef998ffe294995b9192d8dc54b927fa14
 
 import "../style/ListView.css";
 import Breadcrumb from "../components/Breadcrumb";
 import StatusButton from "../components/StatusButton";
 import PriorityButton from "../components/PriorityButton";
-<<<<<<< HEAD
-=======
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
->>>>>>> 17ef3eeef998ffe294995b9192d8dc54b927fa14
 
 // ぱんくずデータ 画面ごとに変更する
 const breadcrumbElements = [{ id: 1, title: "ホーム" }];

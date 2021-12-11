@@ -3,6 +3,7 @@ import '../style/Detail.css';
 import { useLocation } from "react-router";
 import { todoListState } from "../atoms/atom";
 import { Link } from "react-router-dom";
+import { ContentContainer } from "../components/ContentContainer";
 
 // ぱんくずデータ 画面ごとに変更する
 const breadcrumbElements = [
@@ -13,8 +14,6 @@ const breadcrumbElements = [
 // ダミーコンポーネント
 export const Detail = () => {
   const location = useLocation();
-  const state = location.state;
-  console.log(state);
   const { todo } = location.state
   const { title,detail,status,priority } = todo;
   
@@ -22,26 +21,7 @@ export const Detail = () => {
     <>
       <Breadcrumb breadcrumbElements={breadcrumbElements} />
       <div className="detail-container">
-        <div className="content-container">
-          <p className="field-name">タスク名：</p>
-          <p className="field-description">{title}</p>
-        </div>
-
-        <div className="content-container">
-          <p className="field-name">内容：</p>
-          <p className="field-description" >{detail}</p>
-        </div>
-
-
-        <div className="content-container">
-          <p className="field-name">ステータス：</p>
-          <p className="field-description">{status}</p>
-        </div>
-
-        <div className="content-container">
-          <p className="field-name">優先度：</p>
-          <p className="field-description">{priority}</p>
-        </div>
+      <ContentContainer todo={todo} />
 
         <div className='btn-container content-container'>
             <Link to='/'><button className='back-button button'>戻る</button></Link>
