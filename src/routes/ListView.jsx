@@ -1,11 +1,19 @@
 import { useRecoilValue } from "recoil";
 import { todoListState } from "../atoms/atom";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
+=======
+>>>>>>> 17ef3eeef998ffe294995b9192d8dc54b927fa14
 
 import "../style/ListView.css";
 import Breadcrumb from "../components/Breadcrumb";
 import StatusButton from "../components/StatusButton";
 import PriorityButton from "../components/PriorityButton";
+<<<<<<< HEAD
+=======
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
+>>>>>>> 17ef3eeef998ffe294995b9192d8dc54b927fa14
 
 // ぱんくずデータ 画面ごとに変更する
 const breadcrumbElements = [{ id: 1, title: "ホーム" }];
@@ -14,17 +22,32 @@ export const ListView = () => {
   // todoリストデータ
   const todoList = useRecoilValue(todoListState);
 
+  // 画面遷移用のフック
+  const navigate = useNavigate();
+
   return (
     <>
       <Breadcrumb breadcrumbElements={breadcrumbElements} />
       <main>
         <div className="task-info-area">
           <p className="task-info">
-            進行中のタスクは<span>3個</span>あります
+            進行中のタスクは
+            {todoList.filter((todo) => todo.status !== "完了").length !== 0 ? (
+              <>
+                <span>
+                  {todoList.filter((todo) => todo.status !== "完了").length}個
+                </span>
+                あります
+              </>
+            ) : (
+              "ありません"
+            )}
           </p>
-          <button className="btn-add">
-            <span>+</span>タスクを追加
-          </button>
+          <Link to="create">
+            <button className="btn-add">
+              <span>+</span>タスクを追加
+            </button>
+          </Link>
         </div>
         <div className="search-area">
           <div className="search-keyword-area">
@@ -90,7 +113,16 @@ export const ListView = () => {
                   </td>
                   <td className="table-content-title"><Link to='/detail' state={{todo: todo}}>{todo.title}</Link></td>
                   <td>
-                    <button className="btn-edit">✎</button>
+                    <button
+                      className="btn-edit"
+                      onClick={() => {
+                        navigate(`edit/${todo.id}`, {
+                          state: { targetTodo: todo },
+                        });
+                      }}
+                    >
+                      ✎
+                    </button>
                   </td>
                   <td>
                     <StatusButton todo={todo} />

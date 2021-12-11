@@ -1,24 +1,15 @@
 import "./App.css";
 
-import { Routes, Route, Link } from "react-router-dom";
-
-import { Create } from "./routes/Create";
-import { Edit } from "./routes/Edit";
-import { Detail } from "./routes/Detail";
-import { ListView } from "./routes/ListView";
+import { Link } from "react-router-dom";
 
 import Header from "./components/Header";
+import Router from "./routes/Router";
 
 const App = () => {
   return (
     <>
       <Header />
-      <Routes>
-        <Route exact path="/" element={<ListView />} />
-        <Route path="create" element={<Create />} />
-        <Route path="edit" element={<Edit />} />
-        <Route path="detail" element={<Detail />} />
-      </Routes>
+      <Router />
       <nav>
         <ul>
           <li>

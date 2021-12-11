@@ -16,7 +16,7 @@ export const todoListState = atom({
     {
       id: 1,
       title: "Github上に静的サイトをホスティングする",
-      detail:"Githubのアカウントを作成する。静的サイトを作成する。作ったサイトをGithubにアップする。",
+      detail: "ハンズオンに従って実装してみる",
       status: "未着手",
       priority: "低",
       createAt: "2020-11-8 18:55:07",
@@ -25,7 +25,7 @@ export const todoListState = atom({
     {
       id: 2,
       title: "ReactでTodoサイトを作成する",
-      detail:"必要な画面の洗い出しと設計。役割分担をどうするか検討する",
+      detail: "ハンズオンに従って実装する",
       status: "完了",
       priority: "中",
       createAt: "2020-11-8 18:55:07",
@@ -34,7 +34,8 @@ export const todoListState = atom({
     {
       id: 3,
       title: "Todoサイトで画面遷移をできるようにする",
-      detail:"react-router-domをインストールしてフィージビリティーをチェックする",
+      detail:
+        "ハンズオンに従って実装してみる、余裕があればカスタマイズしてみる",
       status: "作業中",
       priority: "高",
       createAt: "2020-11-8 18:55:07",
