@@ -14,7 +14,7 @@
     "recoil-persist": "^4.0.0",
     "web-vitals": "^1.0.1"
   },
-  "homepage": "https://if-tech-support.github.io/",
+  "homepage": "https://if-tech-support.github.io/todo_team/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
