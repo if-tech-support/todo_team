@@ -1,0 +1,44 @@
+/* すべての項目が入るコンテナ */
+.detail-container {
+    width: 80%;
+    padding: 70px 0 30px 56px;
+  }
+  
+  /* 各項目の入るコンテナ */
+.content-container {
+    display: flex;
+    border-bottom: 1px solid rgba(207, 199, 199, 0.8);
+    padding: 10px;
+  }
+
+  /*  */
+  .field-name{
+    font-size: 24px;
+    width:200px;
+  }
+
+  .field-description {
+    width: 81%;
+    border: 1px solid #bebaba;
+    box-sizing: border-box;
+    border-radius: 4px;  
+    padding: 5px 6px;
+  }
+  
+  .button {
+    border: none;
+    width: 100px;
+    height: 52px;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  
+  .button:hover {
+    opacity: 0.7;
+  }
+  
+  .back-button {
+    background-color: #84adc5;
+    margin-right: 20px;
+  }
+  
