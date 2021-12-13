@@ -1,11 +1,10 @@
 import { useRecoilValue } from "recoil";
 import { todoListState } from "../atoms/atom";
-
+import { Link } from "react-router-dom";
 import "../style/ListView.css";
 import Breadcrumb from "../components/Breadcrumb";
 import StatusButton from "../components/StatusButton";
 import PriorityButton from "../components/PriorityButton";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import SortTaskButton from "../components/SortTaskButton"
 
@@ -114,7 +113,11 @@ export const ListView = () => {
                   <td>
                     <input type="checkbox" />
                   </td>
-                  <td className="table-content-title">{todo.title}</td>
+                  <td className="table-content-title">
+                    <Link to="/detail" state={{ todo: todo }}>
+                      {todo.title}
+                    </Link>
+                  </td>
                   <td>
                     <button
                       className="btn-edit"
