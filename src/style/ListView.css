@@ -217,3 +217,22 @@ main {
   vertical-align: middle;
   margin-right: 10px;
 }
+
+/* ------------------------------
+  テーブル ソート矢印表示
+------------------------------ */
+.asc,
+.desc {
+  border: none;
+  outline: none;
+}
+.sort-arrow {
+  position: relative;
+  width: 0px;
+  border-color: #4e758d;
+  border-style: solid;
+  border-width: 10px;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
